@@ -77,7 +77,7 @@ public class EmployeeController {
     }
 
 
-    /*
+    /**
     * 新增员工
     *
     * @return
@@ -103,6 +103,16 @@ public class EmployeeController {
         log.info("分页查询，参数为：{}",employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
+    }
+
+
+
+    @PostMapping("/status/{status}")
+    @ApiOperation("员工禁用/启用")
+    public Result starorStop(@PathVariable Integer status,long id){
+        log.info("员工状态：{},员工id：{}",status,id);
+        employeeService.startOrStop(status,id);
+        return Result.success();
     }
 
 }
