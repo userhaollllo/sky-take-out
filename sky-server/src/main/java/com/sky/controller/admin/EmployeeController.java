@@ -106,12 +106,37 @@ public class EmployeeController {
     }
 
 
-
+/**
+ * 员工禁用/启用
+ * */
     @PostMapping("/status/{status}")
     @ApiOperation("员工禁用/启用")
     public Result starorStop(@PathVariable Integer status,long id){
         log.info("员工状态：{},员工id：{}",status,id);
         employeeService.startOrStop(status,id);
+        return Result.success();
+    }
+
+/**
+ * 根据id查询员工
+ *
+ * */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工")
+    public Result<Employee> getBYIdS(@PathVariable Long id){
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+
+    }
+
+
+    /**
+     * 更新员工数据
+     * */
+    @PutMapping
+    @ApiOperation("更新员工数据")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        employeeService.update(employeeDTO);
         return Result.success();
     }
 
