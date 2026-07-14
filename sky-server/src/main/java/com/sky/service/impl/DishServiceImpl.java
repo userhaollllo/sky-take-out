@@ -34,7 +34,7 @@ public class DishServiceImpl implements DishService {
     @Autowired
     private SetmealDishMapper setmealDishMapper;
 
-
+//新增菜品
     public void saveWithFlavor(DishDTO dishDTO) {
           Dish dish = new Dish();
           BeanUtils.copyProperties(dishDTO, dish);
@@ -54,7 +54,7 @@ public class DishServiceImpl implements DishService {
           //设置n种口味
           dishFlavorMapper.insertBatch(flavors);
     }
-
+    //分页查询
     public PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO){
         PageHelper.startPage(dishPageQueryDTO.getPage(),dishPageQueryDTO.getPageSize());
         Page<DishVO> page = dishMapper.pageQuery(dishPageQueryDTO);
@@ -63,7 +63,7 @@ public class DishServiceImpl implements DishService {
     }
 
 
-
+//删除菜品
     @Transactional //开启事务
     public void deleteBatch(List<Long> ids){
         //先判断是否菜品正在销售
@@ -88,6 +88,8 @@ public class DishServiceImpl implements DishService {
             dishFlavorMapper.deleteByDishId(id);
         }
     }
+
+    //根据菜品id查询菜品
     public DishVO getByWithFlavorId(Long id){
         //获取菜品id
         Dish dish = dishMapper.getById(id);
@@ -103,7 +105,7 @@ public class DishServiceImpl implements DishService {
 
     }
 
-
+//修改菜品
     public void updateWithFlavor(DishDTO dishDTO){
         Dish dish = new Dish();
         BeanUtils.copyProperties(dishDTO, dish);
@@ -124,11 +126,11 @@ public class DishServiceImpl implements DishService {
         }
 
     }
-
+//根据分类id查询菜品
     public List<Dish> list(Long categoryId){
         Dish dish =  Dish.builder()
                 .categoryId(categoryId)
-                .status(StatusConstant.DISABLE)
+                .status(StatusConstant.ENABLE)
                 .build();
 
         return dishMapper.list(dish);

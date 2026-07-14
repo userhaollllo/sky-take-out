@@ -79,10 +79,10 @@ public class DishController {
     public Result<List<Dish>> list(Long categoryId){
         log.info("根据分类id查询菜品：{}",categoryId);
 
-        List<Dish> dishList = dishService.list(categoryId);
+        List<Dish> list = dishService.list(categoryId);
 
 
-        return  Result.success();
+        return  Result.success(list);
 
 
 

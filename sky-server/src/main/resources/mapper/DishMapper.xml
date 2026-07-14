@@ -40,12 +40,15 @@
 
 <select id="list" resultType="Dish" parameterType="Dish">
     select  * from dish
-    <if test="categoryId != null" >
-        and category_id = #{categoryId}
-    </if>
-    <if test="status != null">
-        and status = #{status}
-    </if>
+    <where>
+        <if test="categoryId != null" >
+            and category_id = #{categoryId}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </where>
+
     order by create_time desc
 </select>
 
