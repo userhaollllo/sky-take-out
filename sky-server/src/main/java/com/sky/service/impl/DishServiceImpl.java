@@ -14,7 +14,6 @@ import com.sky.mapper.SetmealDishMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,6 +123,15 @@ public class DishServiceImpl implements DishService {
             dishFlavorMapper.insertBatch(flavors);
         }
 
+    }
+
+    public List<Dish> list(Long categoryId){
+        Dish dish =  Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.DISABLE)
+                .build();
+
+        return dishMapper.list(dish);
     }
 
 }
