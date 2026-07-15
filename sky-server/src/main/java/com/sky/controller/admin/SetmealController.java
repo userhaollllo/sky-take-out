@@ -77,12 +77,11 @@ public class SetmealController {
 
 
 
-    @PutMapping("/status/{status}")
+    @PostMapping("/status/{status}")
     @ApiOperation("启用/禁用套餐")
-    public Result StarOrStop(@PathVariable Integer status ,Long id){
-
-
-        return  null;
+    public Result starOrStop(@PathVariable Integer status ,Long id){
+        setmealService.startOrStop(status,id);
+        return  Result.success();
     }
 
 }
