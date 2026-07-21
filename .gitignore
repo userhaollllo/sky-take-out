@@ -3,4 +3,6 @@
 *.iml
 *.class
 *Test.java
+# 忽略本地开发配置yml
+application-dev.yml
 **/test/
