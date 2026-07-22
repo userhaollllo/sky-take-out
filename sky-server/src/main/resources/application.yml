@@ -51,6 +51,10 @@ sky:
     appid: ${sky.wechat.appid}
     secret: ${sky.wechat.secret}
 
+  shop:
+    address: 广东省广州市番禺区
+  baidu:
+     ak: N6nsPg4DuPHrz9COPSHCN0umrXT59BlH
 
 
 
