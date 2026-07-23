@@ -52,7 +52,7 @@ sky:
     secret: ${sky.wechat.secret}
 
   shop:
-    address: 广东省广州市番禺区
+    address: 北京市海淀区上地十街10号
   baidu:
      ak: N6nsPg4DuPHrz9COPSHCN0umrXT59BlH
 

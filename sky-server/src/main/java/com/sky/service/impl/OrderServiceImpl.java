@@ -27,6 +27,7 @@ import com.sky.vo.OrderSubmitVO;
 import com.sky.vo.OrderVO;
 
 
+import com.sky.websocket.WebSocketServer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,6 +35,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +58,8 @@ public class OrderServiceImpl implements OrderService {
      private AddressBookMapper addressBookMapper;
      @Autowired
      private WeChatPayUtil weChatPayUtil;
+     @Autowired
+     private WebSocketServer webSocketServer;
 
      @Value("${sky.shop.address}")
      private String shopAddress;
@@ -167,6 +171,14 @@ public class OrderServiceImpl implements OrderService {
                   .build();
 
           orderMapper.update(orders);
+          //通过websocket推送消息
+          Map map =new HashMap();
+          map.put("type",1);
+          map.put("orderId", ordersDB.getId());
+          map.put("content","订单"+outTradeNo);
+
+          String json = JSONObject.toJSONString(map);
+          webSocketServer.sendToAllClient(json);
      }
 
      public PageResult pageQuery4User(int pageNum,int pageSize,Integer status){
