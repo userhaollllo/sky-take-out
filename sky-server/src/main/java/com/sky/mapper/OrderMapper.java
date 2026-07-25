@@ -48,5 +48,16 @@ public interface OrderMapper {
     /**
      * 根据动态条件查询营业额
      * */
+    /**
+     * 根据动态条件统计营业额
+     * @param map
+     */
     Double sumByMap(Map map);
+
+    /**
+     * 根据动态条件统计用户数量
+     * @param map
+     * @return
+     */
+    Integer countByMap(Map map);
 }
